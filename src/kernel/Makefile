@@ -12,7 +12,8 @@ TARGET := $(BIN_DIR)/nova.elf
 all: $(TARGET)
 
 $(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	@objcopy -O elf64-x86-64 -B i386 -I binary font.psf font.o
+	$(CC) $(CFLAGS) -o $@ $^ font.o $(LDFLAGS)
 
 %.o: %.c
 	@echo CC $^

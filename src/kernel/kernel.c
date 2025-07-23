@@ -1,7 +1,7 @@
-#include <stdint.h>
-#include "bootinfo.h"
+#include "klibc/stdio.h"
 
 void _start(BootInfo* b){
-	*(uint32_t*)(b->Framebuffer.addr) = 0xFF0000;
+	initialize_nova_fb(b);
+	kputc("[NOVA] Hello world!\n");
 	for(;;);
 }
