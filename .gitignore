@@ -1,0 +1,11 @@
+*.EFI
+*.o
+*.img
+*.iso
+
+ovmf
+src/boot/uefi
+.vscode
+
+bin/
+obj/
