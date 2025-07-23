@@ -1,6 +1,7 @@
 CC 		 := gcc
 CFLAGS := -m64 -Wall -Wextra -pedantic -ffreestanding \
-					-fno-stack-protector -m64 -mno-red-zone -nostdlib
+					-fno-stack-protector -m64 -mno-red-zone -nostdlib \
+					-I../../include -I../../include/kernel
 LDFLAGS := -lgcc
 
 CFILES := $(shell find . -type f -name '*.c')
