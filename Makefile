@@ -1,15 +1,17 @@
 OUTPUT := nova
 
-all:
+all: build_nova build_img
+
+build_nova:
 	@make -C src/boot
-# kernel goes here
-	@make build_img
+	@make -C src/kernel
 
 build_img:
 	dd if=/dev/zero of=$(OUTPUT).img bs=512 count=93750
 	mformat -i $(OUTPUT).img ::
 	mmd -i $(OUTPUT).img ::/EFI
 	mmd -i $(OUTPUT).img ::/EFI/BOOT
+	mcopy -i $(OUTPUT).img bin/nova.elf ::
 	mcopy -i $(OUTPUT).img bin/BOOTX64.EFI ::/EFI/BOOT
 	mkdir -p iso/
 	cp $(OUTPUT).img iso
@@ -19,6 +21,7 @@ build_img:
 clean:
 	@rm *.img *.iso
 	@make -C src/boot clean
+	@make -C src/kernel clean
 
 qemu:
 	@qemu-system-x86_64 -cpu qemu64 -drive if=pflash,format=raw,unit=0,file=ovmf/OVMF_CODE.4m.fd,readonly=on \
