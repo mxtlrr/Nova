@@ -12,7 +12,7 @@ typedef struct {
 	uint8_t ist;
 	uint8_t type_attr;
 	uint16_t offset2;
-	uint16_t offset3;
+	uint32_t offset3;
 	uint32_t zero;
 } __attribute__((packed)) idt_desc64;
 

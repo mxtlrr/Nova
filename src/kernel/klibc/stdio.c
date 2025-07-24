@@ -99,7 +99,8 @@ void kprintf(char* fmt, ...){
 					case 'd': {
 						uint32_t number = va_arg(ap, uint32_t);
 						uint32_t digit_count = ((uint32_t)n) - strlen(itoa(number, 10));
-						for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						if(number != 0) for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						else for(uint32_t i = 0; i < (uint32_t)n; i++) kputc('0');
 						kputs(itoa(number, 10));
 						break;
 					}
@@ -107,7 +108,8 @@ void kprintf(char* fmt, ...){
 					case 'x': {
 						uint32_t number = va_arg(ap, uint32_t);
 						uint32_t digit_count = ((uint32_t)n) - strlen(itoa(number, 16));
-						for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						if(number != 0) for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						else for(uint32_t i = 0; i < (uint32_t)n; i++) kputc('0');
 						kputs(itoa(number, 16));
 						break;
 					}

@@ -1,10 +1,13 @@
 %macro isr_err_stub 1
 isr_stub_%+%1:
+	push byte %1
 	jmp stub
 %endmacro
 
 %macro isr_no_err_stub 1
 isr_stub_%+%1:
+	push byte 0
+	push byte %1
 	jmp stub
 %endmacro
 
@@ -42,9 +45,61 @@ isr_err_stub    30
 isr_no_err_stub 31
 
 [extern exception_handler]
+%macro x64pushall 0
+	push rax
+	push rbx
+	push rcx
+	push rdx
+	push rsi
+	push rdi
+
+	push r8
+	push r9
+	push r10
+	push r11
+	push r12
+	push r13
+	push r14
+	push r15
+%endmacro
+
+%macro x64popall 0
+	pop r15
+	pop r14
+	pop r13
+	pop r12
+	pop r11
+	pop r10
+	pop r9
+	pop r8
+	
+	pop rdi
+	pop rsi
+	pop rdx
+	pop rcx
+	pop rbx
+	pop rax
+%endmacro
+
 stub:
+	push rax
+	push rbx
+	push rcx
+	push rdx
+	push rsi
+	push rdi
+	push rbp
+
+	mov rdi, rsp
 	call exception_handler
 
+	pop rbp
+	pop rsi
+	pop rdi
+	pop rdx
+	pop rcx
+	pop rbx
+	pop rax
 	add rsp, 8
 	iretq
 

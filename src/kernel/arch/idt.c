@@ -19,8 +19,8 @@ void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags) {
 }
 
 void load_idt(void){
-	idtr.base = (uintptr_t)&idt[0];
-	idtr.lim  = (uint16_t)sizeof(idt_desc64) * 255;
+	idtr.base = (uint64_t)&idt[0];
+	idtr.lim  = (uint16_t)(sizeof(idt_desc64) * 256) - 1;
 
 	for(uint8_t vector = 0; vector < 32; vector++){
 		idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
