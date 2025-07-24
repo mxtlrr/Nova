@@ -89,7 +89,8 @@ int main(int argc, char** argv){
 		}
 	};
 
-	
+	asm("cli");
+	exit_bs();
 	(*((void(* __attribute__((sysv_abi)))(BootInfo*))(entry)))(&b);
 
 	// The kernel should never return here.

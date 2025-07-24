@@ -6,7 +6,7 @@ int memcmp(uint8_t* str1, uint8_t* str2, size_t n){
     if(str1[i] == str2[i]) counter++;
   }
   
-  return (counter == n) ? 0 : ((counter == 0) ? -1 : counter);
+  return (counter == n) ? 0 : ((counter == 0) ? 0 : counter);
 }
 
 void* memmove(void* dest, void* src, size_t n){
@@ -23,6 +23,7 @@ void* memmove(void* dest, void* src, size_t n){
 void* memset(void* s, int c, size_t n){
   uint8_t* p = (uint8_t*)s;
   for(size_t i = 0; i < n; i++) p[i] = (uint8_t)c;
+  return s;
 }
 
 void *memcpy(void* dest, const void* src, size_t n) {

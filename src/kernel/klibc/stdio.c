@@ -42,13 +42,13 @@ void scroll() {
 	uint32_t bytes_per_line = width * bytes_per_pixel;
 	uint8_t *fb2 = (uint8_t*)fb;
 	
-	for (int y = 0; y < height-16; y++) {
+	for (uint32_t y = 0; y < height-16; y++) {
 		uint8_t *dst = fb2 + (y * bytes_per_line);
 		uint8_t *src = fb2 + ((y+16) * bytes_per_line);
 		memcpy(dst, src, bytes_per_line);
 	}
 
-	for (int y = height-16; y < height; y++) {
+	for (uint32_t y = height-16; y < height; y++) {
 		uint8_t *dst = fb2 + (y * bytes_per_line);
 		memset(dst, 0, bytes_per_line);
 	}
