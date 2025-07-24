@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
 
 #include "klibc/string.h"
 #include "bootinfo.h"
@@ -15,3 +16,4 @@ void setcolor(uint32_t c);
 
 void kputc(char c);
 void kputs(char* fmt);
+void kprintf(char* fmt, ...);

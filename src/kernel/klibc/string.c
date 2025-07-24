@@ -32,3 +32,25 @@ void *memcpy(void* dest, const void* src, size_t n) {
   for (size_t i = 0; i < n; i++) pdest[i] = psrc[i];
   return dest;
 }
+
+uint32_t strlen(char* f){
+  uint32_t i=0;
+  for(; f[i] != '\0'; i++);
+  return i;
+}
+
+char* itoa(unsigned int num, int base){ 
+	static char repr[]= "0123456789abcdef";
+	static char buffer[50]; 
+	char *ptr; 
+
+	ptr = &buffer[49]; 
+	*ptr = '\0'; 
+
+	do {
+		*--ptr = repr[num%base]; 
+		num /= base; 
+	}while(num != 0); 
+
+	return(ptr); 
+}

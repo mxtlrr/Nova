@@ -83,3 +83,65 @@ void kputc(char c){
 void kputs(char* fmt){
 	for(int i = 0; fmt[i] != '\0'; i++) kputc(fmt[i]);
 }
+
+void kprintf(char* fmt, ...){
+	va_list ap;
+	va_start(ap, fmt);
+
+	char* ptr;
+	for(ptr = fmt; *ptr != '\0';){
+		if(*ptr == '%'){
+			++ptr;
+			if(*ptr == '0'){
+				char n = (*++ptr) - 0x30;
+				char f = (*++ptr);
+				switch(f){
+					case 'd': {
+						uint32_t number = va_arg(ap, uint32_t);
+						uint32_t digit_count = ((uint32_t)n) - strlen(itoa(number, 10));
+						for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						kputs(itoa(number, 10));
+						break;
+					}
+
+					case 'x': {
+						uint32_t number = va_arg(ap, uint32_t);
+						uint32_t digit_count = ((uint32_t)n) - strlen(itoa(number, 16));
+						for(uint32_t i = 0; i < digit_count; i++) kputc('0');
+						kputs(itoa(number, 16));
+						break;
+					}
+				}
+			} else if(*ptr == '#'){
+				char n = (*++ptr);
+				switch(n){
+					case 'x':
+						kputs("0x");	
+						kputs(itoa(va_arg(ap, uint32_t), 16));
+						break;
+				}
+			} else {
+				switch(*ptr){
+					case 'x':
+						kputs(itoa(va_arg(ap, uint32_t), 16));
+						break;
+
+					case 'd':
+						kputs(itoa(va_arg(ap, uint32_t), 10));
+						break;
+					
+					case 'c':
+						kputc(va_arg(ap, int));
+						break;
+					
+					case 's':
+						kputs(va_arg(ap, char*));
+						break;
+				}
+			}
+		} else {
+			kputc(*ptr);
+		}
+		*ptr++;
+	}
+}
