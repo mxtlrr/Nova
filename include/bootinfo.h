@@ -6,4 +6,4 @@ typedef struct {
 		uint32_t pitch;
 		uint16_t width, height;
 	} Framebuffer;
-} __attribute__((packed)) BootInfo;
+} BootInfo;

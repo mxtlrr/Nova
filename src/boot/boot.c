@@ -86,11 +86,11 @@ int main(int argc, char** argv){
 			.pitch = 4 * gop->Mode->Information->PixelsPerScanLine,
 			.width = gop->Mode->Information->HorizontalResolution,
 			.height = gop->Mode->Information->VerticalResolution
-		}
+		},
 	};
 
-	asm("cli");
 	exit_bs();
+	asm("cli");
 	(*((void(* __attribute__((sysv_abi)))(BootInfo*))(entry)))(&b);
 
 	// The kernel should never return here.
