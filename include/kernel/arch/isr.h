@@ -4,6 +4,7 @@
 #include "klibc/stdio.h"
 
 typedef struct registers_t {
+	uint64_t r8, r9, r10, r11, r12, r13, r14, r15;
 	uint64_t rbp, rsi, rdi;
 	uint64_t rdx, rcx, rbx, rax;
 	uint64_t int_no, err_code;
@@ -12,3 +13,8 @@ typedef struct registers_t {
 
 __attribute__((noreturn))
 void exception_handler(registers_t* r);
+
+typedef void (*isr_t)(registers_t* r);
+
+void register_irq(uint8_t vector, isr_t callback);
+void irq_handler(registers_t* r);

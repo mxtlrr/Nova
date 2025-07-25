@@ -1,6 +1,5 @@
 #include "arch/idt.h"
 
-
 __attribute__((aligned(0x10)))
 static idt_desc64 idt[256];
 
@@ -24,6 +23,12 @@ void load_idt(void){
 
 	for(uint8_t vector = 0; vector < 32; vector++){
 		idt_set_descriptor(vector, isr_stub_table[vector], 0x8E);
+	}
+
+	remap(0x20, 0x28);
+
+	for(uint8_t vector = 32; vector < 48; vector++){
+		idt_set_descriptor(vector, irq_stub_table[vector-32], 0x8e);
 	}
 
 	// load idt and set interrupt flag

@@ -6,6 +6,8 @@
 #define INTR_GATE 0x8E
 #define TRAP_GATE 0x8F
 
+#include "io.h"
+
 typedef struct {
 	uint16_t offset1;
 	uint16_t sel;
@@ -22,6 +24,8 @@ typedef struct {
 } __attribute__((packed)) idtr_t;
 
 extern void* isr_stub_table[];
+extern void* irq_stub_table[];
+
 extern uint8_t vectors[256];
 
 void idt_set_descriptor(uint8_t vector, void* isr, uint8_t flags);
