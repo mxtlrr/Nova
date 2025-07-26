@@ -4,7 +4,7 @@
 #include "klibc/stdio.h"
 
 typedef struct registers_t {
-	uint64_t r8, r9, r10, r11, r12, r13, r14, r15;
+	uint64_t r15, r14, r13, r12, r11, r10, r9, r8;
 	uint64_t rbp, rsi, rdi;
 	uint64_t rdx, rcx, rbx, rax;
 	uint64_t int_no, err_code;

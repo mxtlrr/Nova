@@ -11,6 +11,7 @@ void _start(BootInfo* b){
 	load_gdt();	kprintf("[NOVA] GDT Enabled.\n");
 	load_idt();	kprintf("[NOVA] IDT Enabled.\n");
 
+	asm("int $0x3");
 	init_pit(50); // Initialize PIT Timer IRQ
 	for(;;) asm("hlt");
 }
