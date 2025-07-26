@@ -40,12 +40,9 @@ void register_irq(uint8_t vector, isr_t callback){
 }
 
 void irq_handler(registers_t* r){
-	color = 0x00ff00;
-	kprintf("IRQ %d recv!\n", r->int_no);
-	color = 0xffffff;
-	eoi(r->int_no);
 	if(handlers[r->int_no] != 0){
 		isr_t h1 = handlers[r->int_no];
 		h1(r);
 	}
+	eoi(r->int_no);
 }

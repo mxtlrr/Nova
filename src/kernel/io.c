@@ -29,6 +29,4 @@ void remap(uint8_t irq0, uint8_t irq8){
 
 	outb(PIC1+1, ICW4);
 	outb(PIC2+1, ICW4);
-
-	outb(PIC1+1, 0xFF); // disable all IRQs
 }

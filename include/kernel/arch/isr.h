@@ -14,7 +14,14 @@ typedef struct registers_t {
 __attribute__((noreturn))
 void exception_handler(registers_t* r);
 
-typedef void (*isr_t)(registers_t* r);
+enum IRQs {
+	IRQ0 = 32,
+	IRQ1, IRQ2, IRQ3, IRQ4,
+	IRQ5, IRQ6, IRQ7, IRQ8,
+	IRQ9, IRQ10, IRQ11, IRQ12,
+	IRQ13, IRQ14, IRQ15
+};
 
+typedef void (*isr_t)(registers_t* r);
 void register_irq(uint8_t vector, isr_t callback);
 void irq_handler(registers_t* r);

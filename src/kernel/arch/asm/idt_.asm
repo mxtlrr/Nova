@@ -126,8 +126,7 @@ i_stub:
 	call irq_handler
 
 	x64popall
-	add rsp, 8
-	
+	add rsp, 16	
 	iretq
 
 

@@ -1,7 +1,7 @@
-#include "arch/idt.h"
-#include "arch/isr.h"
-
 #include "klibc/stdio.h"
+
+#include "arch/idt.h"
+#include "arch/irq/timer.h"
 
 extern void load_gdt();
 
@@ -11,5 +11,6 @@ void _start(BootInfo* b){
 	load_gdt();	kprintf("[NOVA] GDT Enabled.\n");
 	load_idt();	kprintf("[NOVA] IDT Enabled.\n");
 
+	init_pit(50); // Initialize PIT Timer IRQ
 	for(;;) asm("hlt");
 }
