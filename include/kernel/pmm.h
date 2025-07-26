@@ -5,6 +5,7 @@
 
 #include "bootinfo.h"
 #include "klibc/stdio.h"
+#include "panic.h"
 
 #define PAGE_SIZE 4096
 extern uint32_t frames[256];

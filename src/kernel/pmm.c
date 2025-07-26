@@ -30,7 +30,9 @@ uint64_t pmm_allocblock(){
 			}
 		}
 	}
-	return 0xDEAD; // could not find!
+
+	kernel_panic(OUT_OF_MEMORY);
+	return 0; // could not find!
 }
 
 void pmm_freeblock(uintptr_t block){
